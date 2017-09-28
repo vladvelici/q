@@ -1,0 +1,23 @@
+syntax = "proto3";
+package comms;
+
+// The greeting service definition.
+service Q {
+    // Add a new job
+    rpc AddJob(AddJobRequest) returns (AddJobResponse) {}
+}
+
+
+// AddJobRequest message containing the script to be added and command line arguments
+message AddJobRequest {
+    string script = 1;
+    string workdir = 2;
+    repeated string args = 3;
+    repeated string environment = 4;
+}
+
+// AddJobResponse is a message containing the job id and position in queue
+message AddJobResponse {
+    int64 id = 1;
+    int64 numJobsBefore = 2; // number of jobs scheduled before this one in the queue
+}
